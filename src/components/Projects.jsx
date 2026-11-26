@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowUpRight, BatteryCharging, GitBranch, ShoppingBag, Waypoints } from 'lucide-react'
+import { ArrowUpRight, BatteryCharging, Building2, GitBranch, ShoppingBag, Waypoints } from 'lucide-react'
 import { FaGithub } from 'react-icons/fa6'
 
 const projects = [
@@ -10,6 +10,9 @@ const projects = [
     tags: ['C++', 'OOP', 'File handling'],
     type: 'cart',
     icon: ShoppingBag,
+    link: 'https://github.com/Shujaa396',
+    linkLabel: 'View on GitHub',
+    github: true,
   },
   {
     number: '02',
@@ -18,6 +21,9 @@ const projects = [
     tags: ['C++', 'Data structures', 'Queues · Graphs · Arrays'],
     type: 'traffic',
     icon: Waypoints,
+    link: 'https://github.com/Shujaa396',
+    linkLabel: 'View on GitHub',
+    github: true,
   },
   {
     number: '03',
@@ -26,6 +32,20 @@ const projects = [
     tags: ['Flutter', 'Dart', 'Android concept'],
     type: 'power',
     icon: BatteryCharging,
+    link: 'https://github.com/Shujaa396',
+    linkLabel: 'View on GitHub',
+    github: true,
+  },
+  {
+    number: '04',
+    title: 'Brightline Facilities',
+    description: 'A responsive commercial cleaning and facilities website concept featuring service sections, industry information, and an enquiry form with email notifications.',
+    tags: ['HTML5', 'CSS3', 'JavaScript', 'Responsive design'],
+    type: 'facilities',
+    icon: Building2,
+    link: 'https://brightline.hatchable.site',
+    linkLabel: 'View Live Demo',
+    github: false,
   },
 ]
 
@@ -72,7 +92,21 @@ function ProjectVisual({ type, Icon }) {
           <div className="visual-float visual-float-power"><Icon size={20} /></div>
         </>
       )}
-      <span className="visual-number">{type === 'cart' ? '01' : type === 'traffic' ? '02' : '03'}</span>
+      {type === 'facilities' && (
+        <>
+          <div className="cart-window">
+            <div className="mini-window-head"><i /><i /><i /></div>
+            <div className="cart-body">
+              <div className="cart-bag"><Building2 size={28} /></div>
+              <span className="cart-line long" />
+              <span className="cart-line short" />
+              <div className="cart-button-mock"><span /><b /><b /></div>
+            </div>
+          </div>
+          <div className="visual-float visual-float-cart"><Icon size={20} /></div>
+        </>
+      )}
+      <span className="visual-number">{type === 'cart' ? '01' : type === 'traffic' ? '02' : type === 'power' ? '03' : '04'}</span>
     </div>
   )
 }
@@ -110,15 +144,16 @@ function Projects() {
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
                   <div className="project-tags">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
-                  <a className="project-link" href="https://github.com/Shujaa396" target="_blank" rel="noreferrer">
-                    <FaGithub size={16} /> View on GitHub <ArrowUpRight size={15} />
+                  <a className="project-link" href={project.link} target="_blank" rel="noopener noreferrer">
+                    {project.github && <FaGithub size={16} />}
+                    {project.linkLabel} <ArrowUpRight size={15} />
                   </a>
                 </div>
               </motion.article>
             )
           })}
         </div>
-        <p className="project-link-note">Project buttons link to my GitHub profile; individual repository URLs have not been provided.</p>
+        <p className="project-link-note">Brightline Facilities is a self-initiated website concept for a fictional business, created as a live portfolio demo.</p>
       </div>
     </section>
   )
